@@ -1,0 +1,18 @@
+
+
+input, label {
+    display: flex;
+    text-align: justify;
+    /* font-family: var(--fonte-padrao); */
+    font-size: 1.3em;
+    color: var(--cor6);
+    line-height: 40px
+    
+}
+
+.formulario{
+  display: flex;
+  margin: 100px;
+  text-align: center;
+  justify-content: center;
+}

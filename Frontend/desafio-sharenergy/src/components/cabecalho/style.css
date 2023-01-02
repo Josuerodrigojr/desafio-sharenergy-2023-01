@@ -1,0 +1,63 @@
+/* Estilo para o cabeçalho */
+
+.cor{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: #18A09A;
+  justify-content: space-between;
+  align-items: flex-end;
+
+}
+
+.item{
+  margin: 30px;
+}
+
+.texto{
+color: #FFFFFF;
+ font-family: Brush Script MT;
+ font-size: 25px;
+ font-weight: 100;
+}
+
+
+
+
+.logo{
+  height: 200px;
+
+}
+
+@media (max-width: 440px) {
+  .texto{
+         font-size: 20px;
+         font-weight: 100;
+      }
+      .item{
+          margin:20px
+      }
+      .logo{
+          height: 150px;
+      }
+      
+  
+}
+
+@media (max-width: 315px) {
+  .texto{
+         font-size: 18px;
+         font-weight: 100;
+      }
+      .item{
+          margin:18px
+      }
+      .logo{
+          height: 120px;
+      }
+      
+  
+}
+
+
+
