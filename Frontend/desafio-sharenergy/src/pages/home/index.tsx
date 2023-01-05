@@ -1,8 +1,10 @@
-import React from 'react';
-import "./home.css"
+import React, {useState} from 'react';
+import "./style.css"
+import { Link } from 'react-router-dom';
 
 
 function Home(){
+
   return(
   <div className='formulario'>
   <form>
@@ -11,7 +13,7 @@ function Home(){
   <label className="color">Senha:</label>
   <input type="password" name="senha"></input>
   <br/>
-  <input type="submit" value="Entrar" />
+  <Link to='/listUsers'><input type="submit" value="Entrar" /></Link>
   <br/>
   <p>Remember me</p>
 </form>

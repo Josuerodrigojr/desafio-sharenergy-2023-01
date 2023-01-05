@@ -23,10 +23,13 @@ export const UserRepository ={
     return await User.findByIdAndUpdate(id, user)
   },
 
-  // getUsersCPF: async (cpf:string)=>{
-  //   const user:Object | null = await User.find({where:{
-  //     cpf:cpf
-  //   }})
-  //   return user
-  // }
+  getUsersCPF: async (cpf:string)=>{
+    return await User.findOne({cpf})
+    
+  },
+  getUsersUserName: async (userName:string)=>{
+    return await User.findOne({userName}) 
+  },
+
+  
 }

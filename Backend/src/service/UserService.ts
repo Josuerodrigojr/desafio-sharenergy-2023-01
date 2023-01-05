@@ -1,5 +1,7 @@
+import { bcry } from './../utils/hash';
 import { UserRepository } from './../repositories/UserRepositories';
-import User from "../schema/User";
+
+
 
 
 
@@ -37,11 +39,13 @@ export const UserService ={
 
   },
 
-  createUsers: async(cpf:string, firstName:string, lastName:string, email:string)=>{
+  createUsers: async(cpf:string, firstName:string, lastName:string, userName:string, password:string)=>{
     
     try{
-      const user = {cpf, firstName, lastName, email}
-      if(!cpf || !firstName || !lastName || !email){
+      const passwordHash = await bcry.make(password)
+      password = passwordHash
+      const user = {cpf, firstName, lastName, userName, password}
+      if(!cpf || !firstName || !lastName || !userName||!password){
         return{
           statusCode: 400,
           data:{
@@ -50,7 +54,25 @@ export const UserService ={
         }
       }
 
+      const getUserCpf = await UserRepository.getUsersCPF(cpf)
+      if(getUserCpf){
+        return{
+          statusCode: 400,
+          data:{
+            message: "Não pode ser feito o cadastro, pois o CPF já está cadastrado"
+          }
+        }
+      }
       
+      const getUseruserName = await UserRepository.getUsersUserName(userName)
+      if(getUseruserName){
+        return{
+          statusCode: 400,
+          data:{
+            message: "Não pode ser feito o cadastro, pois o userName já está cadastrado"
+          }
+        }
+      }
 
       const createUser = await UserRepository.createUsers(user)
 
@@ -130,5 +152,79 @@ export const UserService ={
       }
 
     }
+  },
+
+  loginUsers: async(userName:string, password:string)=>{
+    try{
+    const user = await UserRepository.getUsersUserName(userName);
+
+    if(!user){
+      return {
+        statusCode: 400,
+        data:{
+          message: "O usuário não existe"
+        }
+      }
+    }
+
+    const userPassword = await bcry.compare(password, user.password)
+    if(!userPassword){
+      return {
+        statusCode: 400,
+        data:{
+          message: "O userName e/ou senha inválidos"
+        }
+      }
+    }
+
+
+
+
+    return{
+      statusCode:200,
+      data:{
+        message: "Login efetuado com sucesso"
+      }
+    }
+  }catch(err){
+    return{
+      statusCode: 500,
+      data:{
+        message: 'Erro ao alterar o usuário',
+        err:err
+      }
+    }
+
   }
+
+    
+  },
+
+  loginRemember: async(cpf:string)=>{
+    try{
+      const user = await UserRepository.getUsersCPF(cpf)
+      console.log(user)
+      if(user){
+        return {
+          statusCode: 200,
+          data:{
+            message: 'Usuário cadastrado no sistema, login efetuado com sucesso',
+            user:user
+          } 
+        }
+      } else {
+        return{
+          statusCode: 400,
+          data: 'Não foi possível efetuar o login, pois o cpf digitado não está cadastrado no sistema'
+        }
+      }
+    } catch(err){
+      return{
+        statusCode: 500,
+        data: err
+      }
+    }
+  }
+
+  
 }
