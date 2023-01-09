@@ -14,8 +14,8 @@ class UserController {
   }
 
   public async create (req: Request, res:Response): Promise<Response>{
-    const {cpf, firstName, lastName, userName, password} = req.body;
-    const response = await UserService.createUsers(cpf, firstName, lastName, userName,password)
+    const {cpf, firstName, lastName, userName, password, endereco, telefone} = req.body;
+    const response = await UserService.createUsers(cpf, firstName, lastName, userName,password, endereco, telefone)
     return res.status(response.statusCode).json(response.data)
     
 
@@ -43,6 +43,7 @@ class UserController {
 
   public async login(req:Request, res:Response): Promise<Response>{
     const {userName, password} = req.body
+
     const response = await UserService.loginUsers(userName, password)
     return res.status(response.statusCode).json(response.data)
   }
@@ -50,6 +51,12 @@ class UserController {
   public async loginRemember(req:Request, res:Response): Promise<Response>{
     const {cpf} = req.body
     const response = await UserService.loginRemember(cpf)
+    return res.status(response.statusCode).json(response.data)
+  }
+
+  public async getId(req:Request, res:Response): Promise<Response>{
+    const {id} = req.params
+    const response = await UserService.getId(id)
     return res.status(response.statusCode).json(response.data)
   }
 

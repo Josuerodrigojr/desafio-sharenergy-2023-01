@@ -1,0 +1,9 @@
+.pageDelete{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 200px;
+
+  
+}
+

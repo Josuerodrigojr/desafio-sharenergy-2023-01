@@ -1,0 +1,23 @@
+.page{
+  display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px;
+
+}
+.center{
+
+  display: flex;
+  flex-direction: column;
+  margin: 100px;
+
+  align-items: center;
+}
+
+.button{
+  max-width: 200px;
+}
+
+.img{
+  max-height:  50px;
+}

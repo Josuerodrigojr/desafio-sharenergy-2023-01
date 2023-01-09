@@ -6,9 +6,12 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import './style.css'
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+
 
 
 interface Users{
+
   picture: {large:string}
   name:{
     first:string
@@ -28,17 +31,24 @@ interface Users{
 
 
 function ListUsers() {
+//Variaveis para pegar o valor da busca
 
+const [selecao, setSelecao] = useState("")
+const [caixa, setCaixa] = useState("")
+
+  //Variaveis para o controle de páginas
   const [loading, setLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage, setPostsPerPage] = useState(12)
+  const [postsPerPage, setPostsPerPage] = useState(15)
+  const [filtrado, setFiltrado] = useState([])
+  const [enter, setEnter] = useState(false)
 
   const [users, setUsers] = useState <Users[]>([])
 
   useEffect(() => {
     async function carregaRepositorios () {
       setLoading(true)
-      const response = await fetch('https://randomuser.me/api/?results=51');
+      const response = await fetch('https://randomuser.me/api/?results=100');
       const userAll = await response.json();
 
       setUsers(userAll.results);
@@ -50,7 +60,7 @@ function ListUsers() {
 
   const indexOfLastPost = currentPage*postsPerPage
   const indexOfFirstPost = indexOfLastPost - postsPerPage
-  const currentUsers = users.slice(indexOfFirstPost,indexOfLastPost)
+  let currentUsers = users.slice(indexOfFirstPost,indexOfLastPost)
   
   const pageNumbers = [];
 
@@ -62,16 +72,76 @@ function ListUsers() {
 
     setCurrentPage(pageNumber)};
 
-    function handleSubmit(e:any) {
+
+  function handleSubmit(e:any) {
       e.preventDefault();
    
     }
 
+
+
+//Pegar o valor da caixa de texto
+
+
+const busca = (e:any) =>{
+  
+if(e.keyCode === 13){
+
+setEnter(true)
+
+
+
+
+} else {
+  setEnter(false)
+}
+}
+
+const filtro = (selecao:string, caixa:string)=>{
+  if(enter===true){  
+  return users.filter((user)=>{
+    if(selecao==='name.first' && caixa !== ""){
+     if(user.name.first === caixa){
+       return user    
+     }
+    }  else if(selecao==='email' && caixa !== ""){
+      if(user.email === caixa){
+        return user    
+       }
+    } else if(selecao ==='login.username' && caixa !==""){
+      if(user.login.username === caixa){
+        return user
+      }
+    }
+  }
+  )
+  }else{
+    return currentUsers
+  }
+}
+
+
+
+
+
  return (
         <>
-        <h1 className='color'>Usuários</h1>
+        <h1 className='color'>Usuários:</h1>
+        <div className='busca'>
+
+                <select name="selecao" value={selecao} onChange={option => setSelecao(option.target.value)}>
+                    <option value=""  >Selecione uma opção</option>
+                    <option value="name.first" >Nome</option>
+                    <option value="email">Email</option>
+                    <option value="login.username">Nome do usuário</option>                 
+                </select>
+                <input type='text' placeholder='Buscar' value={caixa} onChange={option => setCaixa(option.target.value)} onKeyDown={(e)=>busca(e)} />
+                <br/>
+                <Link to='/cats'><Button>Cats <img src='icons8-gato-preto-50.png'></img></Button></Link>
+            </div>
+
         <section className="container" >
-          {currentUsers.map((user)=>{
+          {filtro(selecao, caixa).map((user:any)=>{
             return(
               <Card className="item">
               <CardActionArea>
@@ -97,7 +167,7 @@ function ListUsers() {
           })}
         </section>
 
-        <nav>
+        <nav className='barra'>
  <ul className='pagination' >
   {pageNumbers.map(number=>(
     <li key={number} className='active'>
@@ -109,7 +179,7 @@ function ListUsers() {
   ))}
  </ul>
  
- </nav>
+ </nav >
 
 
          

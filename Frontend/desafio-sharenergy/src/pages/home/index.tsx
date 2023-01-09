@@ -1,23 +1,63 @@
 import React, {useState} from 'react';
 import "./style.css"
-import { Link } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
+import api from '../../services/api';
+import { Button } from 'react-bootstrap';
 
 
 function Home(){
 
+  const history = useHistory();
+  const [userName, setUserName] = useState('')
+  const [password, setPassword] = useState('')
+  const [cpf, setCpf] = useState('')
+
+  const dados = {
+    userName,
+    password,
+    cpf
+  }
+
+  const login = async ()=>{
+
+    const response = await api.post('users/login', dados)
+
+    if(response.status === 200){
+      history.push('/listUsers')
+    } else  {
+      alert('Email ou senha inválidos')
+    }
+
+  }
+
+  const loginCpf = async()=>{
+    const response = await api.post('/users/loginCpf', dados)
+
+    if(response.status === 200){
+      history.push('/listUsers')
+    } else{
+      alert('Cpf não cadastrado no sistema')
+    }
+  }
+ 
+
   return(
+
   <div className='formulario'>
   <form>
   <label className="color">Email:</label>
-  <input type="text" name="email"></input>
-  <label className="color">Senha:</label>
-  <input type="password" name="senha"></input>
+    <input type="text" value={userName} onChange={e => setUserName(e.target.value)}></input>
+    <label className="color">Senha:</label>
+    <input type="text" value={password} onChange={e => setPassword(e.target.value)}></input>
   <br/>
-  <Link to='/listUsers'><input type="submit" value="Entrar" /></Link>
+  <Button className='button' onClick={()=> login()}>Login </Button>
   <br/>
-  <p>Remember me</p>
+  <p>ou utilize seu cpf</p>
+  <input type="text" value={cpf} onChange={e => setCpf(e.target.value)}></input>
+  <Button className='button' onClick={()=> loginCpf()}>Remember me </Button>
 </form>
   </div>
+
   )
 }
 

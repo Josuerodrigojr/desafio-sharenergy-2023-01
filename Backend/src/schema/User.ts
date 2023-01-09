@@ -7,6 +7,8 @@ interface UserInterface extends Document{
   lastName: string
   password: string
   cpf: string
+  endereco: string
+  telefone: string
 }
 
 const userSchema = new Schema ({
@@ -14,7 +16,9 @@ const userSchema = new Schema ({
   firstName: String,
   lastName: String,
   password: String,
-  cpf: String
+  cpf: String,
+  endereco: String,
+  telefone: String
 }, {
   timestamps: true
 })

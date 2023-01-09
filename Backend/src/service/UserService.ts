@@ -39,15 +39,15 @@ export const UserService ={
 
   },
 
-  createUsers: async(cpf:string, firstName:string, lastName:string, userName:string, password:string)=>{
+  createUsers: async(cpf:string, firstName:string, lastName:string, userName:string, password:string, endereco:string, telefone:string)=>{
     
     try{
       const passwordHash = await bcry.make(password)
       password = passwordHash
-      const user = {cpf, firstName, lastName, userName, password}
-      if(!cpf || !firstName || !lastName || !userName||!password){
+      const user = {cpf, firstName, lastName, userName, password, endereco, telefone}
+      if(!cpf || !firstName || !lastName || !userName||!password || !endereco || !telefone){
         return{
-          statusCode: 400,
+          statusCode: 201,
           data:{
             message: "Todos os campos devem ser preenchidos",
             }
@@ -57,7 +57,7 @@ export const UserService ={
       const getUserCpf = await UserRepository.getUsersCPF(cpf)
       if(getUserCpf){
         return{
-          statusCode: 400,
+          statusCode: 201,
           data:{
             message: "Não pode ser feito o cadastro, pois o CPF já está cadastrado"
           }
@@ -67,9 +67,9 @@ export const UserService ={
       const getUseruserName = await UserRepository.getUsersUserName(userName)
       if(getUseruserName){
         return{
-          statusCode: 400,
+          statusCode: 201,
           data:{
-            message: "Não pode ser feito o cadastro, pois o userName já está cadastrado"
+            message: "Não pode ser feito o cadastro, pois o email já está cadastrado"
           }
         }
       }
@@ -78,7 +78,7 @@ export const UserService ={
 
 
       return{
-        statusCode: 201,
+        statusCode: 200,
         data:{
           message: 'Usuário cadastrado com sucesso',
           user:createUser
@@ -134,7 +134,7 @@ export const UserService ={
     try{
       const uploadUser = await UserRepository.updateUsers(id, user)
       return{
-        statusCode: 201,
+        statusCode: 200,
         data:{
           message: "Usuário atualizado com sucesso",
           user: uploadUser
@@ -160,7 +160,7 @@ export const UserService ={
 
     if(!user){
       return {
-        statusCode: 400,
+        statusCode: 204,
         data:{
           message: "O usuário não existe"
         }
@@ -170,7 +170,7 @@ export const UserService ={
     const userPassword = await bcry.compare(password, user.password)
     if(!userPassword){
       return {
-        statusCode: 400,
+        statusCode: 204,
         data:{
           message: "O userName e/ou senha inválidos"
         }
@@ -214,7 +214,7 @@ export const UserService ={
         }
       } else {
         return{
-          statusCode: 400,
+          statusCode: 204,
           data: 'Não foi possível efetuar o login, pois o cpf digitado não está cadastrado no sistema'
         }
       }
@@ -224,6 +224,33 @@ export const UserService ={
         data: err
       }
     }
+  },
+
+  getId: async(id:string) =>{
+    try{
+      const user = await UserRepository.getUserId(id)
+
+      if(user){
+        return {
+          statusCode: 200,
+          data:{
+            message: 'Usuário cadastrado no sistema',
+            user:user
+          } 
+        }
+      } else {
+        return{
+          statusCode: 400,
+          data: 'Não foi possível efetuar o login, pois o id digitado não está cadastrado no sistema'
+        }
+      }
+    } catch(err){
+      return{
+        statusCode: 500,
+        data: err
+      }
+    }
+
   }
 
   

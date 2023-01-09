@@ -30,6 +30,9 @@ export const UserRepository ={
   getUsersUserName: async (userName:string)=>{
     return await User.findOne({userName}) 
   },
+  getUserId: async(id:string)=>{
+    return await User.findById(id)
+  }
 
   
 }

@@ -1,0 +1,19 @@
+.center{
+
+  display: flex;
+  margin: 100px;
+  text-align: center;
+  justify-content: center;
+}
+
+.page{
+  display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px;
+
+}
+
+.img{
+  max-height:  50px;
+}
