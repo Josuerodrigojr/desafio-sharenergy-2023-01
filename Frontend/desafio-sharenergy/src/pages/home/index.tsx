@@ -21,7 +21,7 @@ function Home(){
   const login = async ()=>{
 
     const response = await api.post('users/login', dados)
-
+    
     if(response.status === 200){
       history.push('/listUsers')
     } else  {
@@ -46,14 +46,14 @@ function Home(){
   <div className='formulario'>
   <form>
   <label className="color">Email:</label>
-    <input type="text" value={userName} onChange={e => setUserName(e.target.value)}></input>
+    <input type="email" value={userName} onChange={e => setUserName(e.target.value)}></input>
     <label className="color">Senha:</label>
-    <input type="text" value={password} onChange={e => setPassword(e.target.value)}></input>
+    <input type="password" value={password} onChange={e => setPassword(e.target.value)}></input>
   <br/>
-  <Button className='button' onClick={()=> login()}>Login </Button>
+  <Button className='button' onClick={()=> login()}>Entrar </Button>
   <br/>
   <p>ou utilize seu cpf</p>
-  <input type="text" value={cpf} onChange={e => setCpf(e.target.value)}></input>
+  <input type='tel' pattern="[0-9]{11}" value={cpf} onChange={e => setCpf(e.target.value)}></input>
   <Button className='button' onClick={()=> loginCpf()}>Remember me </Button>
 </form>
   </div>

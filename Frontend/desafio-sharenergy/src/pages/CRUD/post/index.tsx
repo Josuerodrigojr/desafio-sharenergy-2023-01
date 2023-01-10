@@ -30,18 +30,15 @@ const create = () =>{
   }
 
 
-
 const create = async ()=>{
   const response =  await api.post('/users', data)
-  console.log(response.status)
-  if(response.status === 200){
+ if(response.status === 200){
   history.push('/users')
 } else {
   alert(response.data.message)
 }
 }
-
-  return(
+return(
     <div className='formulario'>
     <form>
     <label className="color">Primeiro nome:</label>
@@ -51,20 +48,20 @@ const create = async ()=>{
     <input value={lastName}  onChange={e => setLastname(e.target.value)}></input>
 
     <label className="color">Email:</label>
-    <input type="text" value={userName} onChange={e => setUserName(e.target.value)}></input>
+    <input type="email" required value={userName} onChange={e => setUserName(e.target.value)}></input>
 
     <label className="color">Telefone:</label>
-    <input type="text" value={telefone} onChange={e => setTelefone(e.target.value)}></input>
+    <input type="tel" value={telefone} onChange={e => setTelefone(e.target.value)}></input>
 
     <label className="color">Endereço:</label>
     <input type="text" value={endereco} onChange={e => setEndereco(e.target.value)}></input>
 
     <label className="color">Cpf:</label>
-    <input type="text" value={cpf} onChange={e => setCpf(e.target.value)}></input>
+    <input type="tel" pattern="[0-9]{11}" value={cpf} onChange={e => setCpf(e.target.value)}></input>
 
 
     <label className="color">Senha:</label>
-    <input value={password} onChange={e => setPassword(e.target.value)}></input>
+    <input type='password' required value={password} onChange={e => setPassword(e.target.value)}></input>
     <br/>
     <Button className='button' onClick={()=> create()}>Cadastrar </Button>
     <Link to='/users'><Button className='button'>Voltar </Button></Link>

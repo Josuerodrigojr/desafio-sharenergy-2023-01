@@ -19,7 +19,8 @@ export const UserRepository ={
     return await User.findByIdAndDelete(id)
   },
 
-  updateUsers: async(id:string, user:object)=>{
+  updateUsers: async(id:string, userName:string|undefined, firstName:string|undefined, lastName:string|undefined, password:string, cpf:string|undefined,endereco:string|undefined, telefone:string|undefined)=>{
+    const user = {userName, firstName, lastName, password, cpf, endereco, telefone}
     return await User.findByIdAndUpdate(id, user)
   },
 

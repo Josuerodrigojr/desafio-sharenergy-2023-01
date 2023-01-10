@@ -36,13 +36,14 @@ class UserController {
 
   public async update (req:Request, res:Response): Promise<Response>{
     const id = req.params.id
-    const user = req.body
-    const response = await UserService.updateUsers(id, user)
+    const {userName, firstName, lastName, password, cpf, endereco, telefone} = req.body
+    const response = await UserService.updateUsers(id, userName, firstName, lastName, password, cpf, endereco, telefone)
     return res.status(response.statusCode).json(response.data)
   }
 
   public async login(req:Request, res:Response): Promise<Response>{
     const {userName, password} = req.body
+
 
     const response = await UserService.loginUsers(userName, password)
     return res.status(response.statusCode).json(response.data)

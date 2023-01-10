@@ -1,92 +1,134 @@
-# Desafio para o processo seletivo SHARENERGY 2023/01
+<h1 align="center">Desafio Sharenergy</h1>
 
-Repositório destinado aos interessados em participar do processo seletivo da SHARENERGY 2023/01. As vagas são voltadas para desenvolvimento de aplicações Web e Mobile.
+# Frontend
 
-## Sobre a SHARENERGY
+O objeto tem como intuito a verificação dos conhecimentos teóricos e prático dos participantes. Sendo solicitação uma API de ponta a ponta. 
 
-No ramo da produção de energia fotovoltaica, há a modalidade de produção compartilhada. Nessa modalidade, diferentes pessoas investem na construção de uma mesma usina fotovoltaica e dividem o retorno finaceiro referente à energia gerada pela usina.
+## Primeira página
 
-Acreditamos que as energias renováveis terão um lugar dominante em nossa economia pelo resto de nossas vidas. Trabalhamos no sentido de ampliar o impacto positivo que as energias renováveis podem ter no meio ambiente e nas nossas vidas. O sucesso da SHARENERGY é resultado de nossa equipe apaixonada, juntamente com nosso compromisso de oferecer a melhor solução.
+<p>A primeira página é somente o login do usuário, podendo fazer de duas formas. Utilizando o email (userName) e a senha. Ou podendo acessar somente com o número do CPF.</p>
 
-Sabemos que negócios enfrentam desafios únicos e por isso oferecemos soluções turnkey, customizadas, economicamente viáveis e seguras.
+## Segunda página
 
-A Startup figura entre as top 10 EnergyTechs do ranking 100 Open Startups desde 2018. Prova de que a inovação está enraizada em nossa cultura. Somos uma startup em estágio de crescimento e você trabalhará diretamente com os fundadores, ajudando a definir a visão, o produto e a experiência do usuário.
+<p>A segunda página é a solicitação da api RandomUsers, em que, o usuário pode fazer a pesquisa por email, username ou nome. Tendo que digitar no campo de busca e apertando a tecla enter.</p>
 
-<p align="left">
-  <a href="https://www.linkedin.com/company/sharenergy-brasil/">
-    <img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn Button">
-  </a>
-  <a href="https://sharenergy.com.br/">
-    <img src="https://img.shields.io/badge/-Website-red" alt="Sharenergy Website Button">
-  </a>
+## Terceira página
+
+<p>A página dos gatos, é voltado a imagem quando o usuário digitar o http na caixa de texto. Caso o http não exista, é direcionado para uma página de erro.</p>
+
+## Quarta página
+<p>A página dos cachorros, é mostrado uma imagem de algum cachorro, sempre que o usuário clicar em atualizar.</p>
+
+## Quinta página
+
+<p>A última página, mostra todos os usuários que estão cadastrados no banco de dados.</p>
+
+# Backend
+
+<p>Para a conexão com o banco de dados foi utilizado o mongoose. Para gerenciar as requisições foi utilizado o express.</p>
+
+## Pasta utils
+
+<p>Na pasta utils, é visto o hash, utilizado para a criptografia da senha no registro e na solicitação para ver os dados do usuário</p>
+
+## Arquivo routes.ts
+
+<p>Apresenta todas as rotas da aplicação no backend, tendo como destino o arquivo controller. Apresenta duas rotas get, três post, uma delete e uma patch.</p>
+
+<p>Nas rotas get, temos uma para visualizar todos os usuários e outra para verificar as informações de um usuário utilizando somento o id.</p>
+
+<p>Nas rotas post, temos uma para criação do usuário na aplicação, outra para a verificação do login e senha e a última para o login utilizando somente o cpf.</p>
+
+<p>Na rota delete, podemos deletar usando como busca somente o id do usuário.</p>
+
+
+<p>Na rota patch, podemos alterar todas as informações do usuário, usando somente o id.</p>
+
+## Pasta controller
+
+<p>Na controller é obtida os dados do corpo da requisição ou do parâmetro e feito uma solicitação para a service e retorna para o usuário o status e a resposta obtida.</p>
+
+## Pasta service
+
+<p>Na service é solicitado para o repository e feito o tratamento de erro, verificando se o usuário já está cadastrado no sistema, se o login e a senha são compativéis para o login do usuário, entre outros.</p>
+
+## Pasta repository
+
+<p>Responsável pela solicitação das informações ao banco de dados e retornar para a service.</p>
+
+
+
+
+
+
+# Tecnologias
+<p display="inline-block" align="center">
+  <img width="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="express-logo" />
+  <img width="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="mongodb-logo" />
+    <img width="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="typescript-logo" />
+  <img width="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="react-logo" />
+    <img width="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="node-logo" />
+  <img width="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="html-logo" />
+    <img width="48" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="css-logo" />
+
+</p>
+                                                                                                  
+# Ferramenta de desenvolvimento
+
+<p display="inline-block" align="center">
+  <img width="48" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/2048px-Visual_Studio_Code_1.35_icon.svg.png" alt="vscode-logo"/>
+   <img width="48" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/postman-icon.png" alt="postman-logo"/>
 </p>
 
-## Sobre a vaga
+# Funcionamento
+## Backend:
 
-Já pensou em potencializar o setor que mais cresce na galáxia e trabalhar com uma solução que utiliza tecnologia web de ponta, altamente distribuída com foco em performance e disponibilidade? 👀
+### Pacotes
 
-Os desenvolvedores da Sharenergy são responsáveis por criar e manter aplicações para clientes internos e externos, prover soluções escaláveis, resilientes e altamente disponíveis que sustentem picos de acesso além de atuar como referência técnica e tutores de outros desenvolvedores.
+``` 
+npm init 
 
-Procuramos por pessoas dinâmicas e que queiram estar aprendendo sempre. Nossa equipe é jovem, motivada e estamos sempre em busca de soluções criativas para alcançar os resultados que nossos clientes esperam. Se você tem esse perfil, é autoconfiante, autodidata e tem facilidade para lidar com desafios diários, essa vaga é para você!
+``` 
 
-# O Desafio
+### Funcionamento da aplicação
 
-Construir uma aplicação web (frontend e backend) capaz de realizar a comunicação com APIs distintas, além de um CRUD.
 
-## Aplicação
+``` 
+npm run dev 
 
-- A página inicial da aplicação deve ser uma `Login Page`;
-- O usuário deve ser capaz de se autenticar utilizando o username `desafiosharenergy` e password `sh@r3n3rgy`, também, deve existir a possibilidade do usuário utilizar o `remember me` para realizar logins automáticos, sem a necessidade de digitar username e password após o primeiro acesso;
-- Após o Login, a página principal deve conter uma listagem de usuários gerada a partir da api [Random User Generator](https://randomuser.me/), a lista deve conter a foto do usuário, nome completo, email, username e idade. Além disso, os requests devem ser páginados, porém, é de critério do participante do desafio a quantidade de resultados a serem exibidos por página e variações para o mesmo. Também, deve haver uma search para buscar usuários por nome, email ou username;
-- Em uma segunda página, o usuário deve ser capaz de selecionar um status code http qualquer, e, após a seleção, deve ser retornada uma imagem da api [HTTP Cat](https://http.cat/) relacionada ao status escolhido, caso não exista tal imagem, deve ser retornada uma imagem de not found à critério de escolha do participante do desafio;
-- Em uma terceira página, deve haver um botão de refresh que, ao ser clicado, deve retornar uma imagem aleatória da api [Random Dog](https://random.dog/);
-- Em uma quarta página, deve haver uma lista de clientes, através da qual o usuário deve ser capaz de cadastrar novos clientes, visualizar informações de um cliente específico, atualizar um cliente e deletar clientes. O cadastro deve possuir nome, email, telefone, endereço e cpf.
+``` 
 
-### Requisitos da aplicação e de código
+## Frontend:
 
-- Interface amigável, bonita e limpa
-- Responsividade
-- Clean Code
+### Pacotes
 
-### Ferramentas e Stack a ser utilizado
 
-- ReactJS para o frontend
-- NodeJS (com ou sem frameworks) ou Golang para o backend
-- MongoDB
-- TypeScript
-- HTML e CSS
+``` 
+npm init 
 
-### Aprimoramentos adicionais da aplicação (opcional)
+``` 
 
-A aplicação criada para o desafio pode ser aprimorada com recursos pensados por você. A seguir, foram listadas algumas sugestões do que poderia ser feito:
+### Funcionamento da aplicação
 
-- Testes
-- Documentação
 
-### Mas, afinal, quais ferramentas a Sharenergy utiliza?
+``` 
+npm start 
 
-* [Javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript) e [Typescript](https://www.typescriptlang.org/)
-* Front-end: [ReactJS](https://reactjs.org/) e [React Native](https://reactnative.dev/)
-* Back-end: [Node.js](https://nodejs.org/en/), [NestJS](https://nestjs.com/) e [Go](https://golang.org/)
-* Banco de dados: [MongoDB](https://www.mongodb.com/) do lado do servidor e [Minimongo](https://guide.meteor.com/collections.html) do lado do cliente (cache)
-* Gerenciamento de Containers: [Docker](https://www.docker.com/)
-* Gerenciamento de Repositórios: [NX](https://nx.dev/)
-* UI: [Tailwind CSS](https://tailwindcss.com/) e [Material-UI V4](https://v4.mui.com/)
-* Sistema Operacional (principal): [Linux](https://www.linux.org/), também sendo possível utilizar o [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/) (WSL)
+``` 
 
-## O que devo entregar?
+## Video do youtube
 
-Esperamos de você duas entregas: o código no GitHub e um vídeo explicativo no YouTube.
+[Desafio - Sharenergy](https://youtu.be/c5_FwE_MTKI)
 
-### Instruções
 
-- Faça um fork desse repositório.
-- Em seguida, crie uma branch, cujo nome é o seu nome completo, no seguinte formato: meu-nome-completo.
-- Resolva o desafio realizando versionamento local e remoto. Fique à vontade em criar outras branches durante o desenvolvimento do código.
-- Inclua no README.md uma breve instrução de instalação e de execução da aplicação criada.
-- Faça um vídeo que explique o que você fez no desafio, com duração aproximada de 5 minutos. A facecam é opcional, mas bem-vinda. O vídeo deve ser postado no YouTube (pode deixar como não listado) e seu link deve ser colocado no README.md.
-- Ao finalizar o desafio, faça um pull request de sua branch para esse repositório.
 
-### Prazo limite de entrega
+## Referências
+[Utilização do mongoose](https://blog.debugeverything.com/pt/como-usar-mongodb-com-node-js/)
 
-O pull request com sua solução do desafio deve ser feito até a data especificada no corpo do email que você recebeu com a descrição do desafio.
+[Configurando o react com typescript](https://medium.com/@willmorimm/criando-um-projeto-web-com-reactjs-e-typescript-10b3604e2c33)
+
+[Configuração das rotas no frontend](https://blog.webdevsimplified.com/2022-07/react-router/)
+
+[Cards nas páginas do frontend](https://mui.com/material-ui/react-card/)
+
+[Páginação](https://www.freecodecamp.org/portuguese/news/como-criar-uma-paginacao-personalizada-em-react/)

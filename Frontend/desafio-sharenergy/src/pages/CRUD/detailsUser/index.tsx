@@ -21,8 +21,6 @@ const DetailsUsers = (props:any) =>{
   const [endereco, setEndereco] = useState("")
   const [cpf, setCpf] = useState("")
 
-
-
   useEffect(() => {
     async function carregarRepositoios() {
       setLoading(true)
@@ -35,7 +33,7 @@ const DetailsUsers = (props:any) =>{
     setEndereco(response.data.user.endereco)
     setCpf(response.data.user.cpf)
 
-      console.log(userName, 'username')
+
     setLoading(false)
   
   }
@@ -44,11 +42,8 @@ const DetailsUsers = (props:any) =>{
 
 
 
-
 const back = () =>{
-
   history.push(`/users`)
-
 }
 
 

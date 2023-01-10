@@ -8,14 +8,6 @@ import { Link } from 'react-router-dom'
 
 function Erro(){
 
-
-  
-
-
- 
-  
-
-
 return(
   <div className='center'>
 

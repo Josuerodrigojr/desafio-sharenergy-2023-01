@@ -45,6 +45,7 @@ export const UserService ={
       const passwordHash = await bcry.make(password)
       password = passwordHash
       const user = {cpf, firstName, lastName, userName, password, endereco, telefone}
+
       if(!cpf || !firstName || !lastName || !userName||!password || !endereco || !telefone){
         return{
           statusCode: 201,
@@ -130,16 +131,49 @@ export const UserService ={
     
   },
 
-  updateUsers: async(id:string, user:object)=>{
+  updateUsers: async(id:string, userName:string|undefined, firstName:string|undefined, lastName:string|undefined, password:string, cpf:string|undefined,endereco:string|undefined, telefone:string|undefined)=>{
     try{
-      const uploadUser = await UserRepository.updateUsers(id, user)
+      const passwordHash = await bcry.make(password)
+      password = passwordHash
+
+      if(!userName || !firstName || !lastName || !password || !cpf || !endereco || !telefone){
+        const user = await UserRepository.getUserId(id) 
+
+        if(!userName){
+          userName = user?.userName
+        }
+        if(!cpf){
+          cpf = user?.cpf
+        }
+        if(!firstName){
+          firstName = user?.firstName
+        }
+        if(!lastName){
+          lastName = user?.lastName
+        } 
+        if(!endereco){
+          endereco = user?.endereco
+        }
+        if(!telefone){
+          telefone = user?.telefone
+        }  
+      } 
+
+
+      const uploadUser = await UserRepository.updateUsers(id, userName, firstName, lastName, password, cpf, endereco, telefone)
+      
+
       return{
         statusCode: 200,
         data:{
           message: "Usuário atualizado com sucesso",
           user: uploadUser
         }
-      }
+      
+
+      } 
+
+      
       
 
     } catch(err){
@@ -168,6 +202,7 @@ export const UserService ={
     }
 
     const userPassword = await bcry.compare(password, user.password)
+
     if(!userPassword){
       return {
         statusCode: 204,
@@ -203,7 +238,7 @@ export const UserService ={
   loginRemember: async(cpf:string)=>{
     try{
       const user = await UserRepository.getUsersCPF(cpf)
-      console.log(user)
+
       if(user){
         return {
           statusCode: 200,

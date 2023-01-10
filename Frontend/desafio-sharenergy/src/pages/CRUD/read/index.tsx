@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import './style.css'
 import api from '../../../services/api'
-
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import { Button } from 'react-bootstrap';
 import Typography from '@mui/material/Typography';
 import { Link, useHistory } from 'react-router-dom';
-
-
 
 
 interface User{
@@ -25,12 +22,9 @@ const history = useHistory();
   useEffect(() => {
     async function carregarRepositoios() {
       setLoading(true)
-    
     const response = await api.get('/users')
     setUsers(response.data.user)
-
     setLoading(false)
-  
   }
   carregarRepositoios()
   }, []);
@@ -39,7 +33,6 @@ const history = useHistory();
     await api.delete(`/users/${id}`)
     setUsers(users)
     history.push('users/delete')
-  
 }
 
 const details = (id:string)=>{
@@ -50,9 +43,7 @@ const edit = (id:string)=>{
   history.push(`/users/edit/${id}`)
 }
 
-
-
-  return(
+return(
 <>
 <div>
 <div className='page'>
@@ -62,7 +53,6 @@ const edit = (id:string)=>{
 </div>
 <section className="container" >
     {users.map((user:any)=>{
-      console.log(user._id)
       return(
       <Card  className='espacamento'>
       <CardContent >

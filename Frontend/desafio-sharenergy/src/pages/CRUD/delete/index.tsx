@@ -7,15 +7,11 @@ import './style.css'
 
 
 const Delete = ()=>{
-
 const history = useHistory()
-
-
 const back = () =>{
   history.push('/users')
 }
-  return(
-
+return(
     <div className='pageDelete'>
     <img src='https://media.tenor.com/HxIJIDEpTs8AAAAM/deleting-deleted.gif'/>
 

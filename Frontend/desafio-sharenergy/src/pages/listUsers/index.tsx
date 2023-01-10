@@ -8,8 +8,6 @@ import './style.css'
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-
-
 interface Users{
 
   picture: {large:string}
@@ -23,27 +21,21 @@ interface Users{
   }
   dob:{
     age:number
-  }
-  
-
+  }  
 }
 
 
 
 function ListUsers() {
-//Variaveis para pegar o valor da busca
 
 const [selecao, setSelecao] = useState("")
 const [caixa, setCaixa] = useState("")
-
-  //Variaveis para o controle de páginas
-  const [loading, setLoading] = useState(false)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage, setPostsPerPage] = useState(15)
-  const [filtrado, setFiltrado] = useState([])
-  const [enter, setEnter] = useState(false)
-
-  const [users, setUsers] = useState <Users[]>([])
+const pageNumbers = [];
+const [loading, setLoading] = useState(false)
+const [currentPage, setCurrentPage] = useState(1)
+const [postsPerPage, setPostsPerPage] = useState(15)
+const [enter, setEnter] = useState(false)
+const [users, setUsers] = useState <Users[]>([])
 
   useEffect(() => {
     async function carregaRepositorios () {
@@ -61,37 +53,21 @@ const [caixa, setCaixa] = useState("")
   const indexOfLastPost = currentPage*postsPerPage
   const indexOfFirstPost = indexOfLastPost - postsPerPage
   let currentUsers = users.slice(indexOfFirstPost,indexOfLastPost)
-  
-  const pageNumbers = [];
 
   for(let i = 1; i<=Math.ceil(users.length/postsPerPage); i++){
     pageNumbers.push(i)
   }
 
   const paginate = (pageNumber:number) => {
-
     setCurrentPage(pageNumber)};
 
-
   function handleSubmit(e:any) {
-      e.preventDefault();
-   
+      e.preventDefault(); 
     }
-
-
-
-//Pegar o valor da caixa de texto
-
-
 const busca = (e:any) =>{
   
 if(e.keyCode === 13){
-
 setEnter(true)
-
-
-
-
 } else {
   setEnter(false)
 }
@@ -119,10 +95,6 @@ const filtro = (selecao:string, caixa:string)=>{
     return currentUsers
   }
 }
-
-
-
-
 
  return (
         <>
@@ -179,11 +151,8 @@ const filtro = (selecao:string, caixa:string)=>{
   ))}
  </ul>
  
- </nav >
-
-
-         
-        </>
+ </nav >      
+</>
     );
 }
 
